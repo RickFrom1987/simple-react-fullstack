@@ -175,6 +175,8 @@ devServer: {
 
 [**Port**](https://webpack.js.org/configuration/dev-server/#devserver-port) specifies the Webpack dev server to listen on this particular port (3000 in this case). When [**open**](https://webpack.js.org/configuration/dev-server/#devserver-open) is set to true, it will automatically open the home page on startup. [Proxying](https://webpack.js.org/configuration/dev-server/#devserver-proxy) URLs can be useful when we have a separate API backend development server and we want to send API requests on the same domain. In our case, we have a Node.js/Express backend where we want to send the API requests to.
 
+When you run webpack dev server what webpack dev server does is, instead of creating a bundled file ( e.g. bundle.js ) in dist folder, it creates a bundled file in memory. It then serves that information to express, and then express creates a web socket connection to render that on the browser on a certain port no. So you can’t actually see index.html or bundle.js file in dist folder , as its in memory.
+
 ### Nodemon
 
 Nodemon is a utility that will monitor for any changes in the server source code and it automatically restart the server. This is used in development only.
@@ -224,20 +226,6 @@ This starts a server and listens on port 8080 for connections. The app responds 
 Yarn and npm use different algorithms to manage packages and resolve dependencies. npm uses a flat tree-style resolution algorithm, while Yarn uses a more efficient graph-based algorithm. This means that Yarn can resolve dependencies faster and more accurately than npm.
 
 TLDR; Just pick one per project and stick with that.
-
-### /api
-When you run webpack dev server what webpack dev server does is, instead of creating a bundled file ( e.g. bundle.js ) in dist folder, it creates a bundled file in memory. It then serves that information to express, and then express creates a web socket connection to render that on the browser on a certain port no. So you can’t actually see index.html or bundle.js file in dist folder , as its in memory.
-
-```
-devServer: {
-    port: 3000,
-    open: true,
-    historyApiFallback: true,
-    proxy: {
-      '/api': 'http://localhost:8080'
-    }
-  }
- ```
 
 ## Dev Tips
 
