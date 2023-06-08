@@ -225,6 +225,20 @@ Yarn and npm use different algorithms to manage packages and resolve dependencie
 
 TLDR; Just pick one per project and stick with that.
 
+### /api
+When you run webpack dev server what webpack dev server does is, instead of creating a bundled file ( e.g. bundle.js ) in dist folder, it creates a bundled file in memory. It then serves that information to express, and then express creates a web socket connection to render that on the browser on a certain port no. So you can’t actually see index.html or bundle.js file in dist folder , as its in memory.
+
+```
+devServer: {
+    port: 3000,
+    open: true,
+    historyApiFallback: true,
+    proxy: {
+      '/api': 'http://localhost:8080'
+    }
+  }
+ ```
+
 ## Dev Tips
 
 ### VSCode + ESLint + Prettier
